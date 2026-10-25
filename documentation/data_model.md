@@ -27,19 +27,45 @@ The relationships must be validated against the actual table columns, key unique
 
 ## Proposed Relationship Review
 
-The following relationships are candidates for validation, not confirmed relationships:
 
-| Potential parent table | Potential child table | Key to investigate |
+## Relationship Validation Results
+
+Initial checks were performed against the sample workbook. The relationships below passed the initial key and reference checks; confirm the final Power BI relationship settings before treating the model as complete.
+
+| Parent table | Child table | Relationship key |
 |---|---|---|
-| Clients | CompanyInvoices | ClientID |
+| Clients | Employees | ClientID |
+| Clients | Routes | ClientID |
 | Clients | Rosters | ClientID |
+| Clients | CompanyInvoices | ClientID |
+| Clients | Exceptions | ClientID |
 | Employees | EmployeeAssignments | EmployeeID |
 | Drivers | Rosters | DriverID |
+| Drivers | DriverPayments | DriverID |
+| Drivers | DriverComplaints | DriverID |
+| Drivers | EmployeeFeedback | DriverID |
+| Drivers | Exceptions | DriverID |
 | Vehicles | Rosters | VehicleID |
 | Routes | Rosters | RouteID |
-| Drivers | DriverPayments | DriverID |
+| Rosters | EmployeeAssignments | RosterID |
+| Rosters | DriverPayments | RosterID |
+| Rosters | DriverComplaints | RosterID |
+| Rosters | EmployeeFeedback | RosterID |
+| Rosters | Exceptions | RosterID |
 
-Additional relationships involving complaints, feedback, exceptions, rate cards, and rosters must be determined from the actual columns and business rules.
+### Additional Validation Notes
+
+- All identified primary key candidates were unique and nonblank.
+- No orphan foreign key references were found in the relationships tested.
+- The EmployeeAssignments combination of RosterID and EmployeeID had no duplicate pairs in the sample.
+- Rosters and Routes had consistent ClientID values.
+- EmployeeAssignments had consistent employee and roster client assignments.
+- DriverPayments contains blank RosterID values for weekly payments and emergency advances. These records should not be discarded automatically.
+- Missing ActualPickup and PaidDate values require appropriate business interpretation.
+- RateCard combinations matched the DutyType and VehicleType combinations found in Rosters. A suitable relationship design still needs to be determined because Rosters does not contain RateCardID.
+- Avoid directly joining transaction tables in ways that could duplicate financial amounts.
+
+These results are preliminary data-quality checks, not a substitute for validating relationship cardinality and filter direction in Power BI.
 
 ## Modelling Principles
 
