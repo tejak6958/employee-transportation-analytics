@@ -1,0 +1,23 @@
+# Temporary and operating-system files
+~$*
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+*.log
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local Power BI backup files
+*.pbix.bak
+*.pbit.bak
+
+# Personal local configuration
+.local/
