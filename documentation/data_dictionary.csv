@@ -1,1 +1,96 @@
-TableName,ColumnName,DataType,Description
+TableName	ColumnName	DataType	Description	KeyRole
+Clients	ClientID	Text	Unique identifier for a client organization.	Primary key candidate
+Clients	ClientName	Text	Client organization name; verify and fictionalize before public release.	
+Clients	TechPark	Text	Technology park or business campus associated with the client.	
+Clients	City	Text	City where the client operation is based.	
+Employees	EmployeeID	Text	Unique identifier for an employee.	Primary key candidate
+Employees	ClientID	Text	Identifier of the client organization the employee belongs to.	Foreign key candidate
+Employees	Gender	Text	Employee gender category used in the sample dataset.	
+Employees	ShiftType	Text	Employee transportation shift category.	
+Employees	Status	Text	Current employee record status.	
+Drivers	DriverID	Text	Unique identifier for a driver.	Primary key candidate
+Drivers	DriverName	Text	Driver display name; currently generic in the inspected sample.	
+Drivers	ContractType	Text	Driver engagement or contract arrangement.	
+Drivers	PreferredVehicleType	Text	Vehicle type preferred or assigned for the driver.	
+Drivers	FuelType	Text	Fuel category associated with the driver or operating arrangement.	
+Drivers	OwnershipType	Text	Indicates whether the vehicle arrangement is company-owned or driver-owned.	
+Drivers	DriverSharePct	Decimal	Driver share percentage used for revenue-share arrangements.	
+Drivers	MonthlySalary	Whole Number	Monthly salary amount, where applicable.	
+Drivers	MonthlyEMI	Whole Number	Monthly vehicle EMI amount, where applicable.	
+Drivers	MinimumDailyTrips	Whole Number	Minimum daily trip target for the driver.	
+Drivers	MinimumMonthlyTrips	Whole Number	Minimum monthly trip target for the driver.	
+Vehicles	VehicleID	Text	Unique identifier for a vehicle.	Primary key candidate
+Vehicles	RegistrationNo	Text	Vehicle registration-like identifier; replace with clearly fictional values before public release.	
+Vehicles	VehicleType	Text	Vehicle seating/type category.	
+Vehicles	FuelType	Text	Fuel type used by the vehicle.	
+Vehicles	OwnershipType	Text	Indicates company or driver ownership.	
+Vehicles	Status	Text	Current vehicle availability or maintenance status.	
+Routes	RouteID	Text	Unique identifier for a route.	Primary key candidate
+Routes	RouteName	Text	Human-readable route label.	
+Routes	ClientID	Text	Identifier of the client associated with the route.	Foreign key candidate
+Routes	RouteLengthType	Text	Route distance category, such as short or long.	
+Routes	Zone	Text	Geographic or operational zone for the route.	
+RateCard	RateCardID	Text	Unique identifier for a rate-card rule.	Primary key candidate
+RateCard	DutyType	Text	Duty category to which the rate applies.	
+RateCard	VehicleType	Text	Vehicle category to which the rate applies.	
+RateCard	CompanyRate	Whole Number	Amount charged to the client under this rate-card rule.	
+RateCard	DriverPayout	Whole Number	Driver payout amount under this rate-card rule.	
+Rosters	RosterID	Text	Unique identifier for an operational roster or trip.	Primary key candidate
+Rosters	RosterDate	Date	Date of the scheduled roster.	
+Rosters	ClientID	Text	Identifier for the client served by the roster.	Foreign key candidate
+Rosters	RouteID	Text	Identifier for the route used by the roster.	Foreign key candidate
+Rosters	VehicleType	Text	Vehicle category recorded for the roster.	
+Rosters	DutyType	Text	Duty category, such as regular or night.	
+Rosters	TripType	Text	Trip direction/type, such as pickup or drop.	
+Rosters	DriverID	Text	Identifier for the driver assigned to the roster.	Foreign key candidate
+Rosters	VehicleID	Text	Identifier for the vehicle assigned to the roster.	Foreign key candidate
+Rosters	ScheduledPickup	DateTime	Scheduled pickup date and time.	
+Rosters	ActualPickup	DateTime	Recorded actual pickup date and time.	
+Rosters	RosterStatus	Text	Operational outcome/status of the roster.	
+Rosters	RouteLengthType	Text	Route length category recorded for the roster.	
+Rosters	Chargeable	Boolean	Boolean indicator of whether the roster is chargeable.	
+Rosters	CompanyRevenue	Whole Number	Company revenue amount recorded for the roster.	
+Rosters	DriverPayout	Whole Number	Driver payout amount recorded for the roster.	
+EmployeeAssignments	RosterID	Text	Identifier for the roster associated with the employee assignment.	Foreign key candidate; composite key needs validation
+EmployeeAssignments	EmployeeID	Text	Identifier for the employee assigned to the roster.	Foreign key candidate; composite key needs validation
+EmployeeAssignments	AssignmentType	Text	Assignment trip type, such as pickup or drop.	
+EmployeeAssignments	AssignmentStatus	Text	Status of the employee's assignment.	
+CompanyInvoices	InvoiceID	Text	Unique identifier for a client invoice.	Primary key candidate
+CompanyInvoices	ClientID	Text	Identifier for the client billed.	Foreign key candidate
+CompanyInvoices	BillingMonth	Text	Month covered by the invoice.	
+CompanyInvoices	InvoiceDate	Date	Date the invoice was issued.	
+CompanyInvoices	DueDate	Date	Date payment is due.	
+CompanyInvoices	InvoiceAmount	Whole Number	Total amount billed on the invoice.	
+CompanyInvoices	PaymentStatus	Text	Invoice payment state, such as paid, pending, or overdue.	
+CompanyInvoices	PaidDate	Date	Date payment was recorded; blank when no payment date is recorded.	
+DriverPayments	PaymentID	Text	Unique identifier for a driver payment transaction.	Primary key candidate
+DriverPayments	DriverID	Text	Identifier for the driver receiving the payment.	Foreign key candidate
+DriverPayments	RosterID	Text	Related roster identifier, where the transaction is roster-linked.	Foreign key candidate
+DriverPayments	PaymentDate	Date	Date the payment transaction was recorded.	
+DriverPayments	PaymentType	Text	Payment category, such as roster payout, weekly payment, or emergency advance.	
+DriverPayments	Amount	Whole Number	Amount of the driver payment transaction.	
+DriverPayments	PaymentStatus	Text	Payment processing status.	
+DriverComplaints	ComplaintID	Text	Unique identifier for a driver complaint.	Primary key candidate
+DriverComplaints	DriverID	Text	Identifier for the driver associated with the complaint.	Foreign key candidate
+DriverComplaints	RosterID	Text	Related roster identifier.	Foreign key candidate
+DriverComplaints	ComplaintDate	Date	Date the complaint was recorded.	
+DriverComplaints	ComplaintType	Text	Category of the complaint.	
+DriverComplaints	Severity	Text	Severity category assigned to the complaint.	
+DriverComplaints	Status	Text	Current complaint resolution status.	
+EmployeeFeedback	FeedbackID	Text	Unique identifier for an employee feedback record.	Primary key candidate
+EmployeeFeedback	EmployeeID	Text	Identifier for the employee providing feedback.	Foreign key candidate
+EmployeeFeedback	RosterID	Text	Related roster identifier.	Foreign key candidate
+EmployeeFeedback	DriverID	Text	Identifier for the driver associated with the feedback.	Foreign key candidate
+EmployeeFeedback	FeedbackDate	Date	Date the feedback was recorded.	
+EmployeeFeedback	Rating	Whole Number	Employee rating on a 1â€“5 scale.	
+EmployeeFeedback	FeedbackType	Text	Category or summary of the feedback.	
+Exceptions	ExceptionID	Text	Unique identifier for an operational or financial exception.	Primary key candidate
+Exceptions	RosterID	Text	Related roster identifier, where applicable.	Foreign key candidate
+Exceptions	ExceptionDate	Date	Date the exception was recorded.	
+Exceptions	ExceptionType	Text	Category of the exception requiring attention.	
+Exceptions	DriverID	Text	Identifier for the driver associated with the exception, where applicable.	Foreign key candidate
+Exceptions	ClientID	Text	Identifier for the client associated with the exception, where applicable.	Foreign key candidate
+Exceptions	ExceptionValue	Whole Number	Numeric value associated with the exception; interpret according to exception type.	
+Exceptions	Priority	Text	Priority level assigned to the exception.	
+Exceptions	NotificationStatus	Text	Status of notification or escalation for the exception.	
+
