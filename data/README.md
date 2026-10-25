@@ -1,22 +1,47 @@
-# Dataset
+# Synthetic Dataset
 
-## Purpose
+## Overview
 
-This folder will contain the synthetic sample dataset used by the Employee Transportation Analytics Power BI project.
+This folder contains the synthetic dataset used for the Employee Transportation Analytics Power BI portfolio project.
 
-## Data Coverage
+The dataset covers six months, from April to September 2026, and represents employee transportation operations, roster assignments, invoicing, driver payments, complaints, feedback, and operational exceptions.
 
-The planned dataset covers April–September 2026 and includes reference tables, transportation operations, financial transactions, and service-quality records.
+## Data Tables
 
-## Publication Requirements
+The workbook includes tables for:
 
-Before publishing any dataset:
+- Clients
+- Employees
+- Drivers
+- Vehicles
+- Routes
+- RateCard
+- Rosters
+- EmployeeAssignments
+- CompanyInvoices
+- DriverPayments
+- DriverComplaints
+- EmployeeFeedback
+- Exceptions
+- Data_Dictionary
 
-- Replace real names and contact details with fictional values.
-- Remove confidential business information.
-- Validate the data for privacy and consistency.
-- Confirm that the published records are suitable for public portfolio use.
+## Anonymisation
 
-## Current Status
+Client names, business-park and city labels, driver names, route names, and vehicle registration identifiers were replaced with generic sample labels.
 
-The dataset has not yet been approved for public publication. Only verified, sanitized sample data should be added to this folder.
+IDs and transaction data were retained to support relationship modelling and business analysis.
+
+## Intended Use
+
+The dataset is intended for portfolio development, Power BI modelling, DAX practice, and operational and financial analysis.
+
+## Important Notes
+
+- This is synthetic sample data and should not be interpreted as verified real-world business performance.
+- Blank values and unusual records may be intentional or may require further business-rule validation.
+- Relationship integrity and financial calculations should be validated before drawing conclusions.
+- Do not add real personal information or confidential business data to this repository.
+
+## Status
+
+The dataset has been anonymised by replacing selected descriptive labels. Further structural, relationship, and privacy checks should be completed before considering publication fully validated.
