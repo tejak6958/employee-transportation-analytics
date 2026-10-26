@@ -1,7 +1,7 @@
 # Employee Transportation Analytics | Power BI
 
 ![Report preview](powerbi/report_preview.png)
-*Illustrative mock-up. A screenshot of the final report will replace this image.*
+
 
 ## Project Overview
 
