@@ -1,31 +1,38 @@
 # Employee Transportation Analytics | Power BI
 
+![Report preview](powerbi/report_preview.png)
+*Illustrative mock-up. A screenshot of the final report will replace this image.*
+
 ## Project Overview
 
-This project explores employee transportation operations using Microsoft Power BI. It focuses on understanding financial performance, transportation operations, driver payments, service exceptions, and employee feedback.
+This project analyses employee transportation operations for a fictional cab-supply company serving tech-park clients. It covers financial performance, roster operations, driver payments, service exceptions, driver complaints and employee feedback, and it includes a dry-run WhatsApp automation concept for complaints, EMI statements and payment reminders.
 
-The project uses synthetic sample data covering April–September 2026. The dataset is intended for demonstration, analytical practice, and portfolio development.
+The project uses **synthetic sample data** covering April to September 2026. It is built for demonstration, analytical practice and portfolio development. It does not describe real company performance.
 
 ## Business Objectives
 
-- Analyse company invoicing, collections, and outstanding amounts.
+- Analyse company invoicing, collections and outstanding amounts.
 - Evaluate transportation operations and roster performance.
-- Analyse driver payments and completed trips.
+- Analyse driver payments, EMI deductions and completed trips.
 - Identify operational exceptions and driver complaints.
 - Understand employee feedback and service quality.
-- Develop a data model that supports business reporting and decision-making.
+- Compare salary-based and revenue-share driver cost models.
+- Build a data model that supports reporting and decision-making.
 
 ## Tools & Technologies
 
-- Microsoft Power BI
-- Power Query
-- DAX
-- Microsoft Excel
-- GitHub
+Microsoft Power BI, Power Query, DAX, Microsoft Excel, Google Sheets (automation demo), Python (dry-run script), GitHub.
+
+## Repository Structure
+
+| Folder | Contents |
+|---|---|
+| `data/` | Synthetic sample dataset (Excel / CSV) |
+| `powerbi/` | Report preview images, data model screenshot, measure documentation, `.pbix` file |
+| `automation/` | WhatsApp automation concept: rules, message templates, sample data, dry-run script |
+| `documentation/` | Business requirements, data quality checks, KPI definitions |
 
 ## Dataset
-
-The sample dataset contains the following tables:
 
 | Table | Rows |
 |---|---:|
@@ -43,32 +50,61 @@ The sample dataset contains the following tables:
 | EmployeeFeedback | 180 |
 | Exceptions | 597 |
 
-The project follows these working financial assumptions:
+Working financial assumptions:
 
-- Company revenue is calculated per chargeable roster.
+- Company revenue is calculated per chargeable roster (completed trips plus employee cancellations).
 - Driver payout is calculated per completed roster.
 
-All published sample data must be synthetic and must not contain real personal information.
+## Data Model
+
+- `Rosters` is the central fact table, linked to Drivers, Clients, Routes and Vehicles.
+- A dedicated `Calendar` table (calendar year plus Indian fiscal year, April to March) is marked as the date table and linked to rosters, payments, complaints, feedback, exceptions and invoices.
+- `EmployeeAssignments` links to both Rosters and Employees.
+- Invoice billing, due and paid dates use inactive relationships activated with `USERELATIONSHIP`.
+
+## DAX Measures
+
+Around 80 documented measures sit in a dedicated measure table, grouped into display folders: Core KPIs, Receivables, Driver Economics (including Salary vs Share), Service Quality, Time Intelligence, Advanced Analytics and Helpers. Each measure carries purpose notes and links to Microsoft documentation inside the DAX code. Calculated columns are documented the same way.
+
+Because the data covers six months, month-over-month measures are the working comparison. Year-over-year measures return blank until a second year of data exists.
+
+## Headline Results (sample data)
+
+| KPI | Value |
+|---|---:|
+| Total revenue | Rs 38.86 lakh |
+| Gross margin | 34.6% |
+| Roster completion rate | 80.9% |
+| On-time pickup | 86.6% |
+| Collection efficiency | 86.4% |
+
+Early findings suggest that driver utilisation is low (about 8 completed trips per driver per month), which makes revenue share safer than salary at current volumes, and that most outstanding receivables sit with one tech park.
 
 ## Project Status
 
-**Current stage:** Data modelling and measure development.
+**Current stage:** Data model complete; measures and calculated columns documented; report pages in progress.
 
-The financial measures have been created in Power BI. The report layout, visualisations, and additional analytical pages will be developed in subsequent stages.
+- [x] Data cleaning and modelling
+- [x] Calendar table and relationships
+- [x] KPI, time intelligence and advanced DAX measures
+- [ ] Three-page report (Executive Overview, Operations and Drivers, Receivables and Risk)
+- [ ] Slicers and metric toggle
+- [ ] Incremental refresh documentation
+- [ ] Automation dry-run demo
 
-## Planned Analysis
+## Planned Report Pages
 
-1. Revenue and collections
-2. Transportation and roster performance
-3. Driver payments and performance
-4. Operational exceptions
-5. Employee feedback and service quality
+1. Executive Overview: revenue, margin, collections, trend and client mix.
+2. Operations and Drivers: trips, punctuality, complaints, driver segments, salary vs share.
+3. Receivables and Risk: ageing, outstanding by tech park, EMI coverage.
 
-The final report scope will be aligned with the documented business requirements.
+## Automation Concept
+
+See [`automation/`](automation/) for four dry-run WhatsApp flows: complaint to driver, driver complaint to agency manager, monthly EMI statement, and formal payment request. Messages are written to a log file by default. No real messages are sent and no real contact details are used.
 
 ## Data Privacy
 
-This repository is intended for portfolio demonstration. Published datasets must use synthetic records, fictional names, and fictional contact details. No confidential company records or personal information should be published.
+Published datasets must use synthetic records, fictional names and fictional contact details. No confidential company records or personal information should be committed. Secrets such as API tokens belong in a local `.env` file, which is excluded by `.gitignore`.
 
 ## Disclaimer
 
